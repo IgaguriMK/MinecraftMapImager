@@ -31,7 +31,7 @@ public class GzipBinary {
         while (true) {
             int readSize = gzipInputStream.read(buffer, 0, chunkSize);
 
-            if( readSize <=0 ) break;
+            if (readSize <= 0) break;
 
             chunks.add(new Chunk(Arrays.copyOf(buffer, readSize)));
         }
@@ -42,21 +42,24 @@ public class GzipBinary {
 
     }
 
-    public byte[] getBytes() {
-
+    public ByteBuffer getByteBuffer() {
         int size = 0;
 
-        for(Chunk c : chunks) {
+        for (Chunk c : chunks) {
             size += c.getSize();
         }
 
         ByteBuffer byteBuffer = ByteBuffer.allocate(size);
 
-        for(Chunk c : chunks) {
+        for (Chunk c : chunks) {
             byteBuffer.put(c.getBytes());
         }
 
-        return byteBuffer.array();
+        return byteBuffer;
+    }
+
+    public byte[] getBytes() {
+        return getByteBuffer().array();
     }
 
     public List<Chunk> getChunks() {
@@ -74,8 +77,7 @@ public class GzipBinary {
             return bytes;
         }
 
-        public int getSize()
-        {
+        public int getSize() {
             return bytes.length;
         }
     }

@@ -18,7 +18,7 @@ public class TagByte extends NamedTag {
         try {
             value = byteBuffer.get();
         } catch (BufferUnderflowException e) {
-            throw new SourceEndException("Input end at reading byte value.", e);
+            throw new SourceEndException("Input end at reading byte value @(" + byteBuffer.position() + ").", e);
         }
     }
 

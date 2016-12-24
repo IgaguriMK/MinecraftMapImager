@@ -35,7 +35,7 @@ public abstract class NamedTag implements NbtTag {
             e.printStackTrace();
             System.exit(1);
         } catch (BufferUnderflowException e) {
-            throw new SourceEndException("Input end at reading tag name.", e);
+            throw new SourceEndException("Input end at reading tag name @(" + byteBuffer.position() + ").", e);
         }
     }
 

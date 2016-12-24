@@ -50,7 +50,7 @@ public class TagCompound extends NamedTag {
                 }
             }
         } catch (SourceEndException e) {
-            throw new SourceEndException("Input end at reading compound tag.", e);
+            throw new SourceEndException("Input end at reading compound tag @(" + byteBuffer.position() + ").", e);
         }
     }
 

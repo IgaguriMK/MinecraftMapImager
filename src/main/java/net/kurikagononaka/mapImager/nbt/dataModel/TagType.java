@@ -40,7 +40,7 @@ public enum TagType {
         try {
             return parseTag(byteBuffer.get());
         } catch (BufferUnderflowException e) {
-            throw new SourceEndException("Input end at reading tag id.", e);
+            throw new SourceEndException("Input end at reading tag id @(" + byteBuffer.position() + ").", e);
         }
     }
 

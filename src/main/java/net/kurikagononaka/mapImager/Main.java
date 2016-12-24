@@ -1,5 +1,6 @@
 package net.kurikagononaka.mapImager;
 
+import net.kurikagononaka.mapImager.map.MapFile;
 import net.kurikagononaka.mapImager.nbt.GzipBinary;
 
 import java.io.FileInputStream;
@@ -28,50 +29,11 @@ public class Main {
         }
 
         try {
+            GzipBinary gzipBinary = new GzipBinary(inputStream);
 
-            int chunkSize = 16;
+            System.out.println("size: " + gzipBinary.getBytes().length);
 
-            GzipBinary gzipBinary = new GzipBinary(inputStream, chunkSize);
-            List<GzipBinary.Chunk> chunks = gzipBinary.getChunks();
-
-            for(GzipBinary.Chunk c : chunks){
-
-                int readSize = c.getSize();
-                byte[] buffer = c.getBytes();
-
-                for(int i = 0; i < chunkSize; i++) {
-
-                    if(i > 0) System.out.print(" ");
-
-                    if(i < readSize) {
-                        System.out.print(String.format("%02x", buffer[i]));
-                    } else {
-                        System.out.print("  ");
-                    }
-                }
-
-                System.out.print(" | ");
-
-                for (int i = 0; i < readSize; i++) {
-                    if(buffer[i] < 0) {
-                        System.out.print(".");
-                        continue;
-                    }
-
-                    char ch = (char) buffer[i];
-
-                    if(Character.isAlphabetic(ch) || Character.isDigit(ch) ) {
-                        System.out.print(ch);
-                    } else {
-                        System.out.print(".");
-                    }
-                }
-
-                System.out.println();
-            }
-
-            System.out.println();
-            System.out.println("Total: " + gzipBinary.getBytes().length);
+            MapFile map = new MapFile(gzipBinary.getBytes());
 
         } catch (IOException e) {
             System.err.println("Can't open file.");

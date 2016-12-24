@@ -17,7 +17,7 @@ public class TagShort extends NamedTag {
         try {
             value = byteBuffer.getShort();
         } catch (BufferUnderflowException e) {
-            throw new SourceEndException("Input end at reading short value.", e);
+            throw new SourceEndException("Input end at reading short value @(" + byteBuffer.position() + ").", e);
         }
     }
 
