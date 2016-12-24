@@ -12,3 +12,14 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
+
+task executableJar(type: Jar, dependsOn: jar)  {
+    archiveName = "${executableBaseName}.jar"
+    manifest {
+        attributes 'Main-Class' : mainClassName
+    }
+
+    from configurations.compile.collect {it.isDirectory() ? it : zipTree(it)}
+    from "$buildDir/classes/main"
+    from "$buildDir/resources/main"
+}
