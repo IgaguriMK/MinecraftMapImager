@@ -1,14 +1,11 @@
 package net.kurikagononaka.mapImager;
 
-import net.kurikagononaka.mapImager.map.MapFile;
-import net.kurikagononaka.mapImager.nbt.GzipBinary;
+import com.flowpowered.nbt.stream.NBTInputStream;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
-import java.util.zip.GZIPInputStream;
 
 
 /**
@@ -29,11 +26,9 @@ public class Main {
         }
 
         try {
-            GzipBinary gzipBinary = new GzipBinary(inputStream);
+            NBTInputStream nbtInputStream =new NBTInputStream(inputStream);
 
-            System.out.println("size: " + gzipBinary.getBytes().length);
-
-            MapFile map = new MapFile(gzipBinary.getBytes());
+            System.out.println(nbtInputStream.readTag().toString());
 
         } catch (IOException e) {
             System.err.println("Can't open file.");
