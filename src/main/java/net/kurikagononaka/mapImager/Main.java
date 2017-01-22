@@ -1,14 +1,15 @@
 package net.kurikagononaka.mapImager;
 
-import net.kurikagononaka.mapImager.map.MapFile;
-import net.kurikagononaka.mapImager.nbt.GzipBinary;
+import com.flowpowered.nbt.Tag;
+import com.flowpowered.nbt.stream.NBTInputStream;
+import net.kurikagononaka.mapImager.model.nbt.MapFileNbt;
+import net.kurikagononaka.mapImager.nbtMapper.NbtMapper;
+import net.kurikagononaka.mapImager.nbtMapper.Path;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
-import java.util.zip.GZIPInputStream;
 
 
 /**
@@ -20,7 +21,7 @@ public class Main {
         InputStream inputStream = Main.class.getResourceAsStream("/map_54.dat");
 
         try {
-            if(args.length >= 1) {
+            if (args.length >= 1) {
                 inputStream = new FileInputStream(args[0]);
             }
         } catch (FileNotFoundException e) {
@@ -29,11 +30,14 @@ public class Main {
         }
 
         try {
-            GzipBinary gzipBinary = new GzipBinary(inputStream);
+            NBTInputStream nbtInputStream = new NBTInputStream(inputStream);
 
-            System.out.println("size: " + gzipBinary.getBytes().length);
+            Tag<?> tag = nbtInputStream.readTag();
 
-            MapFile map = new MapFile(gzipBinary.getBytes());
+
+            MapFileNbt map = (MapFileNbt) NbtMapper.parse(MapFileNbt.class, tag);
+
+            System.out.println(map);
 
         } catch (IOException e) {
             System.err.println("Can't open file.");
