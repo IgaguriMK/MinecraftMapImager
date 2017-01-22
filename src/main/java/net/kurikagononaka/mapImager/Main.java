@@ -34,7 +34,6 @@ public class Main {
 
             Tag<?> tag = nbtInputStream.readTag();
 
-            System.out.println(tag.toString());
 
             MapFileNbt map = (MapFileNbt) NbtMapper.parse(MapFileNbt.class, tag);
 
