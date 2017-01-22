@@ -1,11 +1,11 @@
-package net.kurikagononaka.mapImager.nbt.dataModel;
+package net.kurikagononaka.mapImager.model.nbt.dataModel;
 
 import org.junit.Test;
 
 import java.nio.ByteBuffer;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  *

@@ -1,13 +1,12 @@
-package net.kurikagononaka.mapImager.nbt.dataModel;
+package net.kurikagononaka.mapImager.model.nbt.dataModel;
 
-import net.kurikagononaka.mapImager.nbt.exception.InvalidTagIdException;
-import net.kurikagononaka.mapImager.nbt.exception.UnknownTagIdException;
+import net.kurikagononaka.mapImager.model.nbt.exception.InvalidTagIdException;
+import net.kurikagononaka.mapImager.model.nbt.exception.UnknownTagIdException;
 import org.junit.Test;
 
 import java.nio.ByteBuffer;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  *
@@ -27,10 +26,9 @@ public class TagTypeTest {
     }
 
     @Test
-    public void parseFromBuffer() throws Exception
-    {
+    public void parseFromBuffer() throws Exception {
         TagType tagByte = TagType.parseTag(ByteBuffer.wrap(
-                new byte[] {
+                new byte[]{
                         0x01
                 }));
 

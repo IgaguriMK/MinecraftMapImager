@@ -1,4 +1,4 @@
-package net.kurikagononaka.mapImager.nbt.dataModel;
+package net.kurikagononaka.mapImager.model.nbt.dataModel;
 
 import org.junit.Test;
 
@@ -6,7 +6,7 @@ import java.nio.ByteBuffer;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  *
@@ -16,7 +16,7 @@ public class TagCompoundTest {
     @Test
     public void type() throws Exception {
         TagCompound tagCompound = new TagCompound(ByteBuffer.wrap(
-                new byte[] {
+                new byte[]{
                         0x00, 0x00, // name
                         0x00        // end
                 }));
@@ -27,12 +27,12 @@ public class TagCompoundTest {
     @Test
     public void parseSingleContent() throws Exception {
         TagCompound tagCompound = new TagCompound(ByteBuffer.wrap(
-                new byte[] {                // TAG_Compound {
+                new byte[]{                // TAG_Compound {
                         0x00, 0x00,         // name : ""
                         0x01,               // TAG_Byte {
                         0x00, 0x01, 'a',    //      name  : "a"
                         0x01,               //      value : 1
-                                            //      }
+                        //      }
                         0x00                // end
                 }));
 
@@ -46,7 +46,7 @@ public class TagCompoundTest {
     @Test
     public void parseSomeContent() throws Exception {
         TagCompound tagCompound = new TagCompound(ByteBuffer.wrap(
-                new byte[] {                // TAG_Compound {
+                new byte[]{                // TAG_Compound {
                         0x00, 0x00,         // name : ""
                         0x01,               // TAG_Byte {
                         0x00, 0x01, 'a',    //      name  : "a"
