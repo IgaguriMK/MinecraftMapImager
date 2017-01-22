@@ -9,7 +9,7 @@ public class Color {
     private final short blue;
     private final short alpha;
 
-    public Color(byte red, byte green, byte blue, byte alpha) {
+    public Color(short red, short green, short blue, short alpha) {
         this.red = red;
         this.green = green;
         this.blue = blue;
@@ -17,14 +17,14 @@ public class Color {
     }
 
     public Color(int r, int g, int b, int a) {
-        this((byte) r, (byte) g, (byte) b, (byte) a);
+        this((short) r, (short) g, (short) b, (short) a);
     }
 
     public Color(int argb) {
-        this.red = (byte) ((argb >> 24) & 0xFF);
-        this.green = (byte) ((argb >> 16) & 0xFF);
-        this.blue = (byte) ((argb >> 8) & 0xFF);
-        this.alpha = (byte) (argb & 0xFF);
+        this.red = (short) ((argb >> 24) & 0xFF);
+        this.green = (short) ((argb >> 16) & 0xFF);
+        this.blue = (short) ((argb >> 8) & 0xFF);
+        this.alpha = (short) (argb & 0xFF);
     }
 
     public int asIntARGB() {
@@ -40,7 +40,7 @@ public class Color {
         int g = mult * green / 255;
         int b = mult * blue / 255;
 
-        return new Color((byte) r, (byte) g, (byte) b, alpha);
+        return new Color((short) r, (short) g, (short) b, alpha);
     }
 
     public Color append(int argb, Color over) {
