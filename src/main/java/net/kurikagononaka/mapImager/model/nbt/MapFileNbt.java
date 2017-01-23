@@ -24,8 +24,8 @@ public class MapFileNbt {
     @NbtValue("/data/xCenter")
     public int xCenter;
 
-    @NbtValue("/data/yCenter")
-    public int yCenter;
+    @NbtValue("/data/zCenter")
+    public int zCenter;
 
     @NbtValue("/data/colors")
     public byte[] colors;
@@ -54,8 +54,8 @@ public class MapFileNbt {
         return xCenter;
     }
 
-    public int getYCenter() {
-        return yCenter;
+    public int getZCenter() {
+        return zCenter;
     }
 
     public byte[] getColors() {
@@ -70,7 +70,7 @@ public class MapFileNbt {
                 ", height=" + height +
                 ", width=" + width +
                 ", xCenter=" + xCenter +
-                ", yCenter=" + yCenter +
+                ", zCenter=" + zCenter +
                 ", colors=" + Arrays.toString(colors) +
                 '}';
     }

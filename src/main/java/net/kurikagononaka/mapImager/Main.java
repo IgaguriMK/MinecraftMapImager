@@ -1,15 +1,13 @@
 package net.kurikagononaka.mapImager;
 
-import com.flowpowered.nbt.Tag;
-import com.flowpowered.nbt.stream.NBTInputStream;
-import net.kurikagononaka.mapImager.model.nbt.MapFileNbt;
-import net.kurikagononaka.mapImager.nbtMapper.NbtMapper;
-import net.kurikagononaka.mapImager.nbtMapper.Path;
+import net.kurikagononaka.mapImager.input.MapFileLoader;
+import net.kurikagononaka.mapImager.model.map.MapFile;
+import net.kurikagononaka.mapImager.model.map.MergedMap;
+import net.kurikagononaka.mapImager.output.ColorImageWriter;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -17,30 +15,42 @@ import java.io.InputStream;
  */
 public class Main {
     public static void main(String[] args) {
-
-        InputStream inputStream = Main.class.getResourceAsStream("/map_54.dat");
-
         try {
+            List<InputStream> inputStreamList = new ArrayList<>();
+
             if (args.length >= 1) {
-                inputStream = new FileInputStream(args[0]);
+                for(String a : args) {
+                    inputStreamList.add(new FileInputStream(a));
+                }
+            } else {
+                for(int i = 0; i <= 58; i++) {
+                    InputStream is = Main.class.getResourceAsStream("/map_" + i + ".dat");
+
+                    if(is != null) {
+                        inputStreamList.add(is);
+                    }
+                }
             }
-        } catch (FileNotFoundException e) {
-            System.err.println("File not found.");
-            System.exit(1);
-        }
 
-        try {
-            NBTInputStream nbtInputStream = new NBTInputStream(inputStream);
+            List<MapFile> mapFiles = new ArrayList<>();
 
-            Tag<?> tag = nbtInputStream.readTag();
+            for(InputStream inputStream : inputStreamList) {
+                MapFile mapFile = new MapFileLoader().loadMapFile(inputStream);
+                mapFiles.add(mapFile);
+                inputStream.close();
+            }
 
+            mapFiles.sort(null);
+            MergedMap mergedMap = new MergedMap();
 
-            MapFileNbt map = (MapFileNbt) NbtMapper.parse(MapFileNbt.class, tag);
+            for(MapFile mapFile : mapFiles) {
+                mergedMap.addMap(mapFile);
+            }
 
-            System.out.println(map);
+            new ColorImageWriter().writeImage(mergedMap.getImage(), "map.png");
 
         } catch (IOException e) {
-            System.err.println("Can't open file.");
+            System.err.println("IO Error.");
             System.exit(1);
         }
     }
