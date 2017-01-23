@@ -12,10 +12,6 @@ public class Vector2 {
         this.y = y;
     }
 
-    public Vector2() {
-        this(0, 0);
-    }
-
     public static Vector2 add(Vector2 u, Vector2 v) {
         return new Vector2(u.x + v.x, u.y + v.y);
     }
@@ -30,6 +26,20 @@ public class Vector2 {
 
     public static Vector2 div(Vector2 v, int a) {
         return new Vector2(v.x / a, v.y / a);
+    }
+
+    public static Vector2 min(Vector2 u, Vector2 v) {
+        return new Vector2(
+                (u.x < v.x) ? u.x : v.x,
+                (u.y < v.y) ? u.y : v.y
+        );
+    }
+
+    public static Vector2 max(Vector2 u, Vector2 v) {
+        return new Vector2(
+                (u.x > v.x) ? u.x : v.x,
+                (u.y > v.y) ? u.y : v.y
+        );
     }
 
     @Override
@@ -48,4 +58,6 @@ public class Vector2 {
 
         return x == o.x && y == o.y;
     }
+
+    public static Vector2 ZERO = new Vector2(0, 0);
 }

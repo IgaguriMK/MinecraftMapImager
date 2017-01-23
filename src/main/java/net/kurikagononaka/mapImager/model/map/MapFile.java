@@ -22,4 +22,19 @@ public class MapFile {
     public ColorImage getColorImage() {
         return colorImage;
     }
+
+    public ColorImage getSizedColorImage() {
+        Vector2 newSize = mapLocation.getBound().size();
+        ColorImage sizedImage = new ColorImage(newSize);
+
+        int bpp = mapLocation.getBlockPerPixel();
+
+        for (int y = 0; y < newSize.y; y++) {
+            for (int x = 0; x < newSize.x; x++) {
+                sizedImage.set(x, y, colorImage.get(x / bpp, y / bpp));
+            }
+        }
+
+        return sizedImage;
+    }
 }

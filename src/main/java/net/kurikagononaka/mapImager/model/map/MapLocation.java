@@ -11,10 +11,7 @@ public class MapLocation {
     private final Vector2 center;
     private final int pixels;
 
-    private final int north;
-    private final int south;
-    private final int west;
-    private final int east;
+    private final Bound bound;
 
     public MapLocation(MapFileNbt nbt) {
         this.scale = nbt.getScale();
@@ -22,39 +19,19 @@ public class MapLocation {
         this.center = new Vector2(nbt.getXCenter(), nbt.getYCenter());
         this.pixels = nbt.width;
 
-        north = center.y - (pixels * blockPerPixel / 2);
-        south = center.y + (pixels * blockPerPixel / 2) - 1;
-        west = center.x - (pixels * blockPerPixel / 2);
-        east = center.x + (pixels * blockPerPixel / 2) - 1;
+        int northIn = center.y - (pixels * blockPerPixel / 2);
+        int southOver = center.y + (pixels * blockPerPixel / 2);
+        int westIn = center.x - (pixels * blockPerPixel / 2);
+        int eastOver = center.x + (pixels * blockPerPixel / 2);
+
+        bound = new Bound(northIn, southOver, westIn, eastOver);
     }
 
-    public Vector2 pixelLocation(Vector2 worldPosition) {
-        Vector2 fromCenter = Vector2.diff(worldPosition, center);
-        Vector2 pixelPos = Vector2.add(Vector2.div(fromCenter, blockPerPixel), new Vector2(pixels / 2, pixels / 2));
-
-        return pixelPos;
+    public Bound getBound() {
+        return bound;
     }
 
-    public Vector2[] cornerBlocks() {
-        return new Vector2[]{
-                new Vector2(east, north),
-                new Vector2(east, south),
-                new Vector2(west, north),
-                new Vector2(west, south)
-        };
-    }
-
-    @Override
-    public String toString() {
-        return "MapLocation{" +
-                "blockPerPixel=" + blockPerPixel +
-                ", scale=" + scale +
-                ", center=" + center +
-                ", pixels=" + pixels +
-                ", north=" + north +
-                ", south=" + south +
-                ", west=" + west +
-                ", east=" + east +
-                '}';
+    public int getBlockPerPixel() {
+        return blockPerPixel;
     }
 }
