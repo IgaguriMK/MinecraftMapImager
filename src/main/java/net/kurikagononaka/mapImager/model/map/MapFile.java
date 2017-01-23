@@ -1,5 +1,6 @@
 package net.kurikagononaka.mapImager.model.map;
 
+import net.kurikagononaka.mapImager.model.map.image.ColorImage;
 import net.kurikagononaka.mapImager.model.nbt.MapFileNbt;
 
 /**
@@ -9,9 +10,9 @@ public class MapFile {
     private final MapLocation mapLocation;
     private final ColorImage colorImage;
 
-    public MapFile(MapFileNbt mapFileNbt, ColorTable colorTable) {
+    public MapFile(MapFileNbt mapFileNbt) {
         mapLocation = new MapLocation(mapFileNbt);
-        colorImage = new ColorImage(mapFileNbt.colors, colorTable, mapFileNbt.width, mapFileNbt.height);
+        colorImage = new ColorImage(mapFileNbt.colors, mapFileNbt.width, mapFileNbt.height);
     }
 
     public MapLocation getMapLocation() {

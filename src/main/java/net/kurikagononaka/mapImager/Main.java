@@ -1,13 +1,9 @@
 package net.kurikagononaka.mapImager;
 
-import com.flowpowered.nbt.Tag;
-import com.flowpowered.nbt.stream.NBTInputStream;
-import net.kurikagononaka.mapImager.model.map.ColorTable;
+import net.kurikagononaka.mapImager.input.MapFileLoader;
 import net.kurikagononaka.mapImager.model.map.MapFile;
-import net.kurikagononaka.mapImager.model.nbt.MapFileNbt;
-import net.kurikagononaka.mapImager.nbtMapper.NbtMapper;
+import net.kurikagononaka.mapImager.output.ColorImageWriter;
 
-import javax.imageio.ImageIO;
 import java.io.*;
 
 
@@ -16,32 +12,21 @@ import java.io.*;
  */
 public class Main {
     public static void main(String[] args) {
-
-        InputStream inputStream = Main.class.getResourceAsStream("/map_55.dat");
-
         try {
+            InputStream inputStream;
+
             if (args.length >= 1) {
                 inputStream = new FileInputStream(args[0]);
+            } else {
+                inputStream = Main.class.getResourceAsStream("/map_54.dat");
             }
-        } catch (FileNotFoundException e) {
-            System.err.println("File not found.");
-            System.exit(1);
-        }
 
-        try {
-            NBTInputStream nbtInputStream = new NBTInputStream(inputStream);
+            MapFile mapFile = new MapFileLoader().loadMapFile(inputStream);
 
-            Tag<?> tag = nbtInputStream.readTag();
-
-
-            MapFileNbt mapNbt = (MapFileNbt) NbtMapper.parse(MapFileNbt.class, tag);
-
-            MapFile mapFile = new MapFile(mapNbt, new ColorTable());
-
-            ImageIO.write(mapFile.getColorImage().image(), "png", new File("map.png"));
+            new ColorImageWriter().writeImage(mapFile.getColorImage(), "map.png");
 
         } catch (IOException e) {
-            System.err.println("Can't open file.");
+            System.err.println("IO Error.");
             System.exit(1);
         }
     }

@@ -1,4 +1,4 @@
-package net.kurikagononaka.mapImager.model.map;
+package net.kurikagononaka.mapImager.model.map.image;
 
 import java.util.ArrayList;
 import java.util.List;
