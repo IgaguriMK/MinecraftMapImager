@@ -7,7 +7,7 @@ apply plugin: 'application'
 sourceCompatibility = 1.8
 
 mainClassName = "net.kurikagononaka.mapImager.Main"
-def executableBaseName = "mapImager-" + version
+def executableBaseName = "mapImager"
 
 repositories {
     mavenCentral()
