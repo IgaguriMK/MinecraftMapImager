@@ -23,18 +23,28 @@ public class Main {
                     inputStreamList.add(new FileInputStream(a));
                 }
             } else {
-                inputStreamList.add(Main.class.getResourceAsStream("/map_54.dat"));
-                inputStreamList.add(Main.class.getResourceAsStream("/map_55.dat"));
+                for(int i = 0; i <= 58; i++) {
+                    InputStream is = Main.class.getResourceAsStream("/map_" + i + ".dat");
+
+                    if(is != null) {
+                        inputStreamList.add(is);
+                    }
+                }
             }
 
-            MergedMap mergedMap = new MergedMap();
+            List<MapFile> mapFiles = new ArrayList<>();
 
             for(InputStream inputStream : inputStreamList) {
                 MapFile mapFile = new MapFileLoader().loadMapFile(inputStream);
-
-                mergedMap.addMap(mapFile);
-
+                mapFiles.add(mapFile);
                 inputStream.close();
+            }
+
+            mapFiles.sort(null);
+            MergedMap mergedMap = new MergedMap();
+
+            for(MapFile mapFile : mapFiles) {
+                mergedMap.addMap(mapFile);
             }
 
             new ColorImageWriter().writeImage(mergedMap.getImage(), "map.png");

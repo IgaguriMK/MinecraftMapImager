@@ -6,7 +6,7 @@ import net.kurikagononaka.mapImager.model.nbt.MapFileNbt;
 /**
  * Created by igaguri on 2017/01/22.
  */
-public class MapFile {
+public class MapFile implements Comparable<MapFile>{
     private final MapLocation mapLocation;
     private final ColorImage colorImage;
 
@@ -36,5 +36,14 @@ public class MapFile {
         }
 
         return sizedImage;
+    }
+
+    public int scale() {
+        return mapLocation.getScale();
+    }
+
+    @Override
+    public int compareTo(MapFile o) {
+        return o.scale() - scale();
     }
 }

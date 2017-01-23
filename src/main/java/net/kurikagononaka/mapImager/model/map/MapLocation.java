@@ -16,7 +16,7 @@ public class MapLocation {
     public MapLocation(MapFileNbt nbt) {
         this.scale = nbt.getScale();
         this.blockPerPixel = 1 << this.scale;
-        this.center = new Vector2(nbt.getXCenter(), nbt.getYCenter());
+        this.center = new Vector2(nbt.getXCenter(), nbt.getZCenter());
         this.pixels = nbt.width;
 
         int northIn = center.y - (pixels * blockPerPixel / 2);
@@ -33,5 +33,9 @@ public class MapLocation {
 
     public int getBlockPerPixel() {
         return blockPerPixel;
+    }
+
+    public int getScale() {
+        return scale;
     }
 }

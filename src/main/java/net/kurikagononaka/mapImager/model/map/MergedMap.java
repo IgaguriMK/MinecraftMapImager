@@ -44,7 +44,11 @@ public class MergedMap {
     private static void writeImage(ColorImage dest, ColorImage from, Vector2 offset) {
         for(int y = 0; y < from.getSize().y; y++) {
             for(int x = 0; x < from.getSize().x; x++) {
-                dest.set(x + offset.x, y + offset.y, from.get(x, y));
+                byte id = from.get(x, y);
+
+                if(id == 0) continue;
+
+                dest.set(x + offset.x, y + offset.y, id);
             }
         }
     }

@@ -13,9 +13,9 @@ import java.util.regex.Pattern;
  */
 public class ColorImageWriter {
 
-    private static final String pngPattern = "\\.png$";
-    private static final String jpegPattern = "\\.jpe?g$";
-    private static final String bmpPattern = "\\.bmp$";
+    private static final String pngPattern = ".*\\.png$";
+    private static final String jpegPattern = ".*\\.jpe?g$";
+    private static final String bmpPattern = ".*\\.bmp$";
 
     private final ColorTable colorTable;
 
