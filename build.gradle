@@ -1,13 +1,18 @@
-group 'net.kurikagononaka'
-version '0.2.0'
+plugins {
+  id 'edu.sc.seis.launch4j' version '2.3.0'
+}
+
 
 apply plugin: 'java'
 apply plugin: 'application'
 
+group 'net.kurikagononaka'
+version '0.2.0'
+
 sourceCompatibility = 1.8
 
 mainClassName = "net.kurikagononaka.mapImager.Main"
-def executableBaseName = "mapImager-" + version
+def executableBaseName = "mapImager"
 
 repositories {
     mavenCentral()
@@ -32,4 +37,25 @@ task executableJar(type: Jar, dependsOn: jar)  {
     from configurations.compile.collect {it.isDirectory() ? it : zipTree(it)}
     from "$buildDir/classes/main"
     from "$buildDir/resources/main"
+}
+
+
+createExe {
+  mainClassName = project.mainClassName
+  outputDir = "release/mapImager"
+  libraryDir = ""
+  headerType = "console"
+  chdir = '.'
+  icon = project.projectDir.toString() + '/icons/map_icon.ico'
+}
+
+task releaseCopy (type: Copy, dependsOn: executableJar) {
+	from 'build/libs'
+	into 'build/release/mapImager'
+	include 'mapImager.jar'
+}
+
+task release (type: Zip, dependsOn: [createExe, releaseCopy]) {
+	from 'build/release/mapImager'
+	into ''
 }
