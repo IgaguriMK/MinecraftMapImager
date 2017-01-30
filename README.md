@@ -18,3 +18,9 @@ Usage
 Default output filename is `map.png`.
 
 Or, on Windows, you can drag-and-drop dat files to exe.
+
+
+License
+-----------
+
+MinecraftMapImager is licensed under MIT license. See [LICENSE](LICENSE.txt).
