@@ -4,8 +4,11 @@ import net.kurikagononaka.mapImager.input.MapFileLoader;
 import net.kurikagononaka.mapImager.model.map.MapFile;
 import net.kurikagononaka.mapImager.model.map.MergedMap;
 import net.kurikagononaka.mapImager.output.ColorImageWriter;
+import org.apache.commons.cli.*;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,44 +18,70 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
+
+        Options options = new Options();
+
+        Option outputOpt = Option.builder("o")
+                .longOpt("output")
+                .required(false)
+                .hasArg()
+                .build();
+
+        options.addOption(outputOpt);
+
         try {
-            List<InputStream> inputStreamList = new ArrayList<>();
+            CommandLine cmd = new DefaultParser().parse(options, args);
 
-            if (args.length >= 1) {
-                for(String a : args) {
-                    inputStreamList.add(new FileInputStream(a));
-                }
-            } else {
-                for(int i = 0; i <= 58; i++) {
-                    InputStream is = Main.class.getResourceAsStream("/map_" + i + ".dat");
+            String output = cmd.hasOption("o") ? cmd.getOptionValue("o") : "map.png";
 
-                    if(is != null) {
-                        inputStreamList.add(is);
-                    }
-                }
-            }
-
-            List<MapFile> mapFiles = new ArrayList<>();
-
-            for(InputStream inputStream : inputStreamList) {
-                MapFile mapFile = new MapFileLoader().loadMapFile(inputStream);
-                mapFiles.add(mapFile);
-                inputStream.close();
-            }
-
-            mapFiles.sort(null);
-            MergedMap mergedMap = new MergedMap();
-
-            for(MapFile mapFile : mapFiles) {
-                mergedMap.addMap(mapFile);
-            }
-
-            new ColorImageWriter().writeImage(mergedMap.getImage(), "map.png");
+            convert(cmd.getArgs(), output);
 
         } catch (IOException e) {
             System.err.println("IO Error.");
             System.exit(1);
+        } catch (ParseException e) {
+
         }
+    }
+
+    private static void convert(String[] files, String output) throws IOException {
+        List<InputStream> inputStreamList = new ArrayList<>();
+
+        if (files.length == 0) {
+            System.err.println("No input file.");
+            System.exit(1);
+        }
+
+        System.err.println("Opening " + files.length + " files ...");
+
+        for (String a : files) {
+            inputStreamList.add(new FileInputStream(a));
+        }
+
+        List<MapFile> mapFiles = new ArrayList<>();
+
+        System.err.println("Parsing files...");
+
+        for (InputStream inputStream : inputStreamList) {
+            MapFile mapFile = new MapFileLoader().loadMapFile(inputStream);
+            mapFiles.add(mapFile);
+            inputStream.close();
+        }
+
+
+        System.err.println("Merging images ...");
+        int count = 1;
+
+        mapFiles.sort(null);
+        MergedMap mergedMap = new MergedMap();
+
+        for (MapFile mapFile : mapFiles) {
+            System.err.println("Merging images (" + (count++) + "/" + mapFiles.size() + ") ...");
+            mergedMap.addMap(mapFile);
+        }
+
+        System.err.println("Writing image to file ...");
+        new ColorImageWriter().writeImage(mergedMap.getImage(), output);
     }
 }
 
