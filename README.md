@@ -1,7 +1,9 @@
-Minecraft Map Imager
+MinecraftMapImager
 ======================
 
 Convert map_\*.dat files to image.
+
+[日本語版はこちら](README_jp.md)
 
 
 Requires
