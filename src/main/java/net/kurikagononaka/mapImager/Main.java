@@ -10,6 +10,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -51,6 +53,18 @@ public class Main {
             System.err.println("No input file.");
             System.exit(1);
         }
+
+        Arrays.sort(files, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+
+                if(o1.length() == o2.length()) {
+                    return o1.compareTo(o2);
+                }
+
+                return o1.length() - o2.length();
+            }
+        });
 
         System.err.println("Opening " + files.length + " files ...");
 
