@@ -10,11 +10,13 @@ public class MapFile {
     private final MapLocation mapLocation;
     private final ColorImage colorImage;
     private final String name;
+    private final int dimension;
 
     public MapFile(MapFileNbt mapFileNbt, String name) {
         mapLocation = new MapLocation(mapFileNbt);
         colorImage = new ColorImage(mapFileNbt.colors, mapFileNbt.width, mapFileNbt.height);
         this.name = name;
+        this.dimension = mapFileNbt.getDimension();
     }
 
     public MapLocation getMapLocation() {
@@ -23,6 +25,10 @@ public class MapFile {
 
     public ColorImage getColorImage() {
         return colorImage;
+    }
+
+    public int getDimension() {
+        return dimension;
     }
 
     public ColorImage getSizedColorImage() {
