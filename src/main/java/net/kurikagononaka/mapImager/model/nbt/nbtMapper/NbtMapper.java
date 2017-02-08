@@ -1,9 +1,8 @@
-package net.kurikagononaka.mapImager.nbtMapper;
+package net.kurikagononaka.mapImager.model.nbt.nbtMapper;
 
 import com.flowpowered.nbt.*;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
 
 /**
  * Created by igaguri on 2017/01/22.

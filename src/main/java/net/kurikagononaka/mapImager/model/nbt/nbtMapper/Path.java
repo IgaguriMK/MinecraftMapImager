@@ -1,4 +1,4 @@
-package net.kurikagononaka.mapImager.nbtMapper;
+package net.kurikagononaka.mapImager.model.nbt.nbtMapper;
 
 import java.util.Arrays;
 import java.util.LinkedList;

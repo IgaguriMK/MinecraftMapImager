@@ -6,13 +6,15 @@ import net.kurikagononaka.mapImager.model.nbt.MapFileNbt;
 /**
  * Created by igaguri on 2017/01/22.
  */
-public class MapFile implements Comparable<MapFile>{
+public class MapFile {
     private final MapLocation mapLocation;
     private final ColorImage colorImage;
+    private final String name;
 
-    public MapFile(MapFileNbt mapFileNbt) {
+    public MapFile(MapFileNbt mapFileNbt, String name) {
         mapLocation = new MapLocation(mapFileNbt);
         colorImage = new ColorImage(mapFileNbt.colors, mapFileNbt.width, mapFileNbt.height);
+        this.name = name;
     }
 
     public MapLocation getMapLocation() {
@@ -42,8 +44,7 @@ public class MapFile implements Comparable<MapFile>{
         return mapLocation.getScale();
     }
 
-    @Override
-    public int compareTo(MapFile o) {
-        return o.scale() - scale();
+    public String getName() {
+        return name;
     }
 }

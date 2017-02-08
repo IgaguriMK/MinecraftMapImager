@@ -1,12 +1,11 @@
 package net.kurikagononaka.mapImager;
 
-import net.kurikagononaka.mapImager.input.MapFileLoader;
+import net.kurikagononaka.mapImager.model.input.MapFileLoader;
 import net.kurikagononaka.mapImager.model.map.MapFile;
 import net.kurikagononaka.mapImager.model.map.MergedMap;
-import net.kurikagononaka.mapImager.output.ColorImageWriter;
+import net.kurikagononaka.mapImager.model.output.ColorImageWriter;
 import org.apache.commons.cli.*;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -30,6 +29,14 @@ public class Main {
                 .build();
 
         options.addOption(outputOpt);
+
+        Option inOrderOpt = Option.builder("i")
+                .longOpt("in-order")
+                .required(false)
+                .build();
+
+        options.addOption(inOrderOpt);
+
 
         try {
             CommandLine cmd = new DefaultParser().parse(options, args);
@@ -68,24 +75,17 @@ public class Main {
 
         System.err.println("Opening " + files.length + " files ...");
 
-        for (String a : files) {
-            inputStreamList.add(new FileInputStream(a));
-        }
-
         List<MapFile> mapFiles = new ArrayList<>();
 
-        System.err.println("Parsing files...");
-
-        for (InputStream inputStream : inputStreamList) {
-            MapFile mapFile = new MapFileLoader().loadMapFile(inputStream);
+        for (String fileName : files) {
+            MapFile mapFile = new MapFileLoader().loadMapFile(fileName);
             mapFiles.add(mapFile);
-            inputStream.close();
         }
 
 
         System.err.println("Merging images ...");
         int count = 1;
-        
+
         MergedMap mergedMap = new MergedMap();
 
         for (MapFile mapFile : mapFiles) {
