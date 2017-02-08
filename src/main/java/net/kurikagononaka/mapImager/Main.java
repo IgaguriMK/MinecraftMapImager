@@ -85,8 +85,7 @@ public class Main {
 
         System.err.println("Merging images ...");
         int count = 1;
-
-        mapFiles.sort(null);
+        
         MergedMap mergedMap = new MergedMap();
 
         for (MapFile mapFile : mapFiles) {
