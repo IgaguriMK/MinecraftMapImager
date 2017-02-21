@@ -19,6 +19,8 @@ public class MapMerger {
     public MergedMap merge(List<SingleMapFile> mapFiles) {
         int chunkSize = chunkSize(mapFiles.size());
 
+        System.err.println("Chunk size: " + chunkSize);
+
         List<List<SingleMapFile>> mapChunks = Lists.partition(mapFiles, chunkSize);
 
         List<MergedMap> mergedMaps = mapChunks.stream()
