@@ -18,7 +18,7 @@ public class MergedMap {
     public void addMap(SingleMapFile singleMapFile) {
 
         if(image == null) {
-            bound = singleMapFile.getMapLocation().getBound();
+            bound = singleMapFile.getBound();
             image = singleMapFile.getSizedColorImage();
 
             return;
@@ -27,7 +27,7 @@ public class MergedMap {
         Bound oldBound = bound;
         ColorImage oldImage = image;
 
-        Bound newBound = singleMapFile.getMapLocation().getBound();
+        Bound newBound = singleMapFile.getBound();
         ColorImage newImage = singleMapFile.getSizedColorImage();
 
         bound = oldBound.merge(newBound);
