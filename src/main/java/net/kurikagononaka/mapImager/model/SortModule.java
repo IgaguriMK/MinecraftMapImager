@@ -1,19 +1,18 @@
 package net.kurikagononaka.mapImager.model;
 
-import net.kurikagononaka.mapImager.model.map.MapFile;
+import net.kurikagononaka.mapImager.model.map.SingleMapFile;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
  * Created by igaguri on 2017/02/08.
  */
-public class SortModule implements Comparator<MapFile> {
+public class SortModule implements Comparator<SingleMapFile> {
 
     public static SortModule newInstance(CommandLine cmd) {
         SortModule sortModule = new SortModule();
@@ -42,16 +41,16 @@ public class SortModule implements Comparator<MapFile> {
         comparators = new PriorityQueue<>();
     }
 
-    public void sort(List<MapFile> mapFiles) {
-        mapFiles.sort(this);
+    public void sort(List<SingleMapFile> singleMapFiles) {
+        singleMapFiles.sort(this);
     }
 
-    private void addComparator(int priority, Comparator<MapFile> comparator) {
+    private void addComparator(int priority, Comparator<SingleMapFile> comparator) {
         comparators.add(new Entry(priority, comparator));
     }
 
     @Override
-    public int compare(MapFile o1, MapFile o2) {
+    public int compare(SingleMapFile o1, SingleMapFile o2) {
 
         for (Entry e : comparators) {
             int cmp = e.get().compare(o1, o2);
@@ -64,14 +63,14 @@ public class SortModule implements Comparator<MapFile> {
 
     private static class Entry implements Comparable<Entry> {
         private final int priority;
-        private final Comparator<MapFile> comparator;
+        private final Comparator<SingleMapFile> comparator;
 
-        public Entry(int priority, Comparator<MapFile> comparator) {
+        public Entry(int priority, Comparator<SingleMapFile> comparator) {
             this.priority = priority;
             this.comparator = comparator;
         }
 
-        public Comparator<MapFile> get() {
+        public Comparator<SingleMapFile> get() {
             return comparator;
         }
 
@@ -85,7 +84,7 @@ public class SortModule implements Comparator<MapFile> {
         }
     }
 
-    private static Comparator<MapFile> fileNameSorter = (o1, o2) -> {
+    private static Comparator<SingleMapFile> fileNameSorter = (o1, o2) -> {
 
         int lenCmp = o1.getName().length() - o2.getName().length();
 
@@ -94,5 +93,5 @@ public class SortModule implements Comparator<MapFile> {
         return o1.getName().compareTo(o2.getName());
     };
 
-    private static Comparator<MapFile> scaleSorter = Comparator.comparingInt(m -> - m.scale());
+    private static Comparator<SingleMapFile> scaleSorter = Comparator.comparingInt(m -> - m.scale());
 }

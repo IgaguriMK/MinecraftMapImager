@@ -1,6 +1,5 @@
 package net.kurikagononaka.mapImager.model.map;
 
-import net.kurikagononaka.mapImager.model.map.image.Color;
 import net.kurikagononaka.mapImager.model.map.image.ColorImage;
 
 /**
@@ -16,11 +15,11 @@ public class MergedMap {
         image = null;
     }
 
-    public void addMap(MapFile mapFile) {
+    public void addMap(SingleMapFile singleMapFile) {
 
         if(image == null) {
-            bound = mapFile.getMapLocation().getBound();
-            image = mapFile.getSizedColorImage();
+            bound = singleMapFile.getMapLocation().getBound();
+            image = singleMapFile.getSizedColorImage();
 
             return;
         }
@@ -28,8 +27,8 @@ public class MergedMap {
         Bound oldBound = bound;
         ColorImage oldImage = image;
 
-        Bound newBound = mapFile.getMapLocation().getBound();
-        ColorImage newImage = mapFile.getSizedColorImage();
+        Bound newBound = singleMapFile.getMapLocation().getBound();
+        ColorImage newImage = singleMapFile.getSizedColorImage();
 
         bound = oldBound.merge(newBound);
         image = new ColorImage(bound.size());

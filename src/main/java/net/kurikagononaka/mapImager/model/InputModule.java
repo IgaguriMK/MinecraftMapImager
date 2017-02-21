@@ -1,7 +1,7 @@
 package net.kurikagononaka.mapImager.model;
 
 import net.kurikagononaka.mapImager.model.input.MapFileLoader;
-import net.kurikagononaka.mapImager.model.map.MapFile;
+import net.kurikagononaka.mapImager.model.map.SingleMapFile;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
@@ -39,20 +39,20 @@ public class InputModule {
         this.dimension = dimension;
     }
 
-    public List<MapFile> loadAll(String[] files) {
-        List<MapFile> mapFiles = new ArrayList<>();
+    public List<SingleMapFile> loadAll(String[] files) {
+        List<SingleMapFile> singleMapFiles = new ArrayList<>();
 
         for (String fileName : files) {
-            MapFile mapFile = load(fileName);
+            SingleMapFile singleMapFile = load(fileName);
 
-            if(filter(mapFile))
-                mapFiles.add(mapFile);
+            if(filter(singleMapFile))
+                singleMapFiles.add(singleMapFile);
         }
 
-        return mapFiles;
+        return singleMapFiles;
     }
 
-    private MapFile load(String fileName) {
+    private SingleMapFile load(String fileName) {
         try {
             return loader.loadMapFile(fileName);
         } catch (IOException e) {
@@ -60,7 +60,7 @@ public class InputModule {
         }
     }
 
-    private boolean filter(MapFile singleMapFile) {
-        return singleMapFile.getDimension() == dimension;
+    private boolean filter(SingleMapFile singleSingleMapFile) {
+        return singleSingleMapFile.getDimension() == dimension;
     }
 }

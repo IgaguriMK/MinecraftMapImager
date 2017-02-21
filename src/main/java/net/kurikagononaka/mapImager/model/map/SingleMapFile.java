@@ -6,13 +6,13 @@ import net.kurikagononaka.mapImager.model.nbt.MapFileNbt;
 /**
  * Created by igaguri on 2017/01/22.
  */
-public class MapFile {
+public class SingleMapFile {
     private final MapLocation mapLocation;
     private final ColorImage colorImage;
     private final String name;
     private final int dimension;
 
-    public MapFile(MapFileNbt mapFileNbt, String name) {
+    public SingleMapFile(MapFileNbt mapFileNbt, String name) {
         mapLocation = new MapLocation(mapFileNbt);
         colorImage = new ColorImage(mapFileNbt.colors, mapFileNbt.width, mapFileNbt.height);
         this.name = name;
