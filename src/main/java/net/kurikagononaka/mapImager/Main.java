@@ -75,10 +75,6 @@ public class Main {
 
         throw new Error("Not reachable");
     }
-
-    private static void convert(String[] files, String output) throws IOException {
-
-    }
 }
 
 
