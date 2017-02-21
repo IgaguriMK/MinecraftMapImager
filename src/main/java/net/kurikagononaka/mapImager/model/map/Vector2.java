@@ -44,7 +44,7 @@ public class Vector2 {
 
     @Override
     public String toString() {
-        return "("  + x + ", " + y + ")";
+        return "(" + x + ", " + y + ")";
     }
 
     @Override

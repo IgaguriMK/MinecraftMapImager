@@ -3,17 +3,15 @@ package net.kurikagononaka.mapImager;
 import net.kurikagononaka.mapImager.model.InputModule;
 import net.kurikagononaka.mapImager.model.OutputModule;
 import net.kurikagononaka.mapImager.model.SortModule;
-import net.kurikagononaka.mapImager.model.input.MapFileLoader;
-import net.kurikagononaka.mapImager.model.map.MapFile;
 import net.kurikagononaka.mapImager.model.map.MergedMap;
-import net.kurikagononaka.mapImager.model.output.ColorImageWriter;
-import org.apache.commons.cli.*;
+import net.kurikagononaka.mapImager.model.map.SingleMapFile;
+import net.kurikagononaka.mapImager.model.output.MapMerger;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -39,20 +37,18 @@ public class Main {
 
             System.err.println("Opening " + files.length + " files ...");
 
-            List<MapFile> mapFiles = inputModule.loadAll(files);
+            List<SingleMapFile> singleMapFiles = inputModule.loadAll(files);
 
             System.err.println("Sorting images ...");
-            sortModule.sort(mapFiles);
+            sortModule.sort(singleMapFiles);
 
             System.err.println("Merging images ...");
             int count = 1;
 
-            MergedMap mergedMap = new MergedMap();
 
-            for (MapFile mapFile : mapFiles) {
-                System.err.println("Merging images (" + (count++) + "/" + mapFiles.size() + ") ...");
-                mergedMap.addMap(mapFile);
-            }
+            MapMerger merger = new MapMerger();
+            MergedMap mergedMap = merger.merge(singleMapFiles);
+
 
             System.err.println("Writing image to file ...");
             outputModule.writeToFile(mergedMap);
