@@ -1,4 +1,4 @@
-package net.kurikagononaka.mapImager.nbtMapper;
+package net.kurikagononaka.mapImager.model.nbt.nbtMapper;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

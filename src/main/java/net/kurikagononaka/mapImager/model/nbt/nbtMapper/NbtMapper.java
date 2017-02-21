@@ -1,9 +1,8 @@
-package net.kurikagononaka.mapImager.nbtMapper;
+package net.kurikagononaka.mapImager.model.nbt.nbtMapper;
 
 import com.flowpowered.nbt.*;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
 
 /**
  * Created by igaguri on 2017/01/22.
@@ -22,7 +21,7 @@ public class NbtMapper {
                 String pathStr = nbtValue.value();
                 Tag<?> valueTag = find(pathStr, tag);
 
-                if(valueTag == null) continue;
+                if (valueTag == null) continue;
 
                 setValue(obj, field, valueTag);
             }
@@ -36,7 +35,7 @@ public class NbtMapper {
         }
     }
 
-    private static void setValue(Object obj, Field field, Tag<?> tag){
+    private static void setValue(Object obj, Field field, Tag<?> tag) {
 
 
         if (field.getType().equals(Integer.TYPE)) {
@@ -44,7 +43,7 @@ public class NbtMapper {
             return;
         }
 
-        if(field.getType().isArray()) {
+        if (field.getType().isArray()) {
             setArrayValue(obj, field, tag);
             return;
         }
@@ -52,21 +51,21 @@ public class NbtMapper {
         return;
     }
 
-    private static void setIntValue(Object obj, Field field, Tag<?> tag){
-        try{
-            if(tag instanceof IntTag) {
+    private static void setIntValue(Object obj, Field field, Tag<?> tag) {
+        try {
+            if (tag instanceof IntTag) {
                 IntTag intTag = (IntTag) tag;
                 field.setInt(obj, intTag.getValue().intValue());
                 return;
             }
 
-            if(tag instanceof ShortTag) {
+            if (tag instanceof ShortTag) {
                 ShortTag shortTag = (ShortTag) tag;
                 field.setInt(obj, shortTag.getValue().intValue());
                 return;
             }
 
-            if(tag instanceof ByteTag) {
+            if (tag instanceof ByteTag) {
                 ByteTag byteTag = (ByteTag) tag;
                 field.setInt(obj, byteTag.getValue().intValue());
                 return;
@@ -76,19 +75,19 @@ public class NbtMapper {
             throw new MappingFailException("Failed mapping value: Can't access target field(" + field.getName() + ").", e);
         }
 
-        throw new MappingFailException("Failed mapping value: No compatible tag found, found "+ tag.getClass().getName() +".");
+        throw new MappingFailException("Failed mapping value: No compatible tag found, found " + tag.getClass().getName() + ".");
     }
 
     private static void setArrayValue(Object obj, Field field, Tag<?> tag) {
-        if(field.getType().getComponentType().equals(Byte.TYPE)) {
+        if (field.getType().getComponentType().equals(Byte.TYPE)) {
             setByteArrayValue(obj, field, tag);
             return;
         }
     }
 
     private static void setByteArrayValue(Object obj, Field field, Tag<?> tag) {
-        try{
-            if(tag instanceof ByteArrayTag) {
+        try {
+            if (tag instanceof ByteArrayTag) {
                 ByteArrayTag byteArrayTag = (ByteArrayTag) tag;
                 field.set(obj, byteArrayTag.getValue());
                 return;
@@ -98,7 +97,7 @@ public class NbtMapper {
             throw new MappingFailException("Failed mapping value: Can't access target field(" + field.getName() + ").", e);
         }
 
-        throw new MappingFailException("Failed mapping value: No compatible tag found, found "+ tag.getClass().getName() +".");
+        throw new MappingFailException("Failed mapping value: No compatible tag found, found " + tag.getClass().getName() + ".");
     }
 
 

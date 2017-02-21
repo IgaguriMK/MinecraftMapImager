@@ -34,8 +34,8 @@ public class ColorImage {
     }
 
     public byte get(int x, int y) {
-        if(x < 0 || width <= x) return 0;
-        if(y < 0 || height <= y) return 0;
+        if (x < 0 || width <= x) return 0;
+        if (y < 0 || height <= y) return 0;
 
         return image[y][x];
     }
@@ -45,8 +45,8 @@ public class ColorImage {
     }
 
     public void set(int x, int y, byte id) {
-        if(x < 0 || width <= x) throw new ArrayIndexOutOfBoundsException("Illegal argument x: " + x + ".");
-        if(y < 0 || height <= y) throw new ArrayIndexOutOfBoundsException("Illegal argument y: " + y + ".");
+        if (x < 0 || width <= x) throw new ArrayIndexOutOfBoundsException("Illegal argument x: " + x + ".");
+        if (y < 0 || height <= y) throw new ArrayIndexOutOfBoundsException("Illegal argument y: " + y + ".");
 
         image[y][x] = id;
     }
@@ -63,7 +63,7 @@ public class ColorImage {
         return bufferedImage;
     }
 
-    public  Vector2 getSize() {
+    public Vector2 getSize() {
         return new Vector2(width, height);
     }
 }

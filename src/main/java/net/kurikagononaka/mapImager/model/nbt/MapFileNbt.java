@@ -1,7 +1,7 @@
 package net.kurikagononaka.mapImager.model.nbt;
 
 
-import net.kurikagononaka.mapImager.nbtMapper.NbtValue;
+import net.kurikagononaka.mapImager.model.nbt.nbtMapper.NbtValue;
 
 import java.util.Arrays;
 

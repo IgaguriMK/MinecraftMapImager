@@ -55,18 +55,18 @@ public class ColorTable {
 
         List<Color> tableList = new ArrayList<>();
 
-        for(Color baseColor : baseTable) {
+        for (Color baseColor : baseTable) {
             tableList.add(baseColor.multScalar(128));
             tableList.add(baseColor.multScalar(220));
             tableList.add(baseColor);
             tableList.add(baseColor.multScalar(135));
         }
 
-        this.table =  tableList.toArray(new Color[]{});
+        this.table = tableList.toArray(new Color[]{});
     }
 
     public Color get(Byte id) {
-        if(id >= table.length)
+        if (id >= table.length)
             return new Color(0, 255, 255, 128);
 
         return table[id];

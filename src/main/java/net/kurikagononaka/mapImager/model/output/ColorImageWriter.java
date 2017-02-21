@@ -1,7 +1,7 @@
-package net.kurikagononaka.mapImager.output;
+package net.kurikagononaka.mapImager.model.output;
 
-import net.kurikagononaka.mapImager.model.map.image.ColorTable;
 import net.kurikagononaka.mapImager.model.map.image.ColorImage;
+import net.kurikagononaka.mapImager.model.map.image.ColorTable;
 
 import javax.imageio.ImageIO;
 import java.io.File;
