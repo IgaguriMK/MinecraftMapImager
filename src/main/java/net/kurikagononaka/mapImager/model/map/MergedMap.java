@@ -15,7 +15,7 @@ public class MergedMap {
         image = null;
     }
 
-    public void addMap(SingleMapFile singleMapFile) {
+    public void addMap(MapFile singleMapFile) {
 
         if(image == null) {
             bound = singleMapFile.getBound();

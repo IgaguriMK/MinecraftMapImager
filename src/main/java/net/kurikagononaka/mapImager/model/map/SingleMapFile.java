@@ -31,6 +31,7 @@ public class SingleMapFile implements MapFile{
         return dimension;
     }
 
+    @Override
     public ColorImage getSizedColorImage() {
         Vector2 newSize = mapLocation.getBound().size();
         ColorImage sizedImage = new ColorImage(newSize);
@@ -46,6 +47,7 @@ public class SingleMapFile implements MapFile{
         return sizedImage;
     }
 
+    @Override
     public Bound getBound()
     {
         return mapLocation.getBound();
