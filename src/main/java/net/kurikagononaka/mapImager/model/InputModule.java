@@ -45,7 +45,7 @@ public class InputModule {
         for (String fileName : files) {
             SingleMapFile singleMapFile = load(fileName);
 
-            if(filter(singleMapFile))
+            if (filter(singleMapFile))
                 singleMapFiles.add(singleMapFile);
         }
 

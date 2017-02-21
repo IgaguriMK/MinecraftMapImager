@@ -6,7 +6,7 @@ import net.kurikagononaka.mapImager.model.nbt.MapFileNbt;
 /**
  * Created by igaguri on 2017/01/22.
  */
-public class SingleMapFile implements MapFile{
+public class SingleMapFile implements MapFile {
     private final MapLocation mapLocation;
     private final ColorImage colorImage;
     private final String name;
@@ -48,8 +48,7 @@ public class SingleMapFile implements MapFile{
     }
 
     @Override
-    public Bound getBound()
-    {
+    public Bound getBound() {
         return mapLocation.getBound();
     }
 

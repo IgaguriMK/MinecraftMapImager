@@ -93,5 +93,5 @@ public class SortModule implements Comparator<SingleMapFile> {
         return o1.getName().compareTo(o2.getName());
     };
 
-    private static Comparator<SingleMapFile> scaleSorter = Comparator.comparingInt(m -> - m.scale());
+    private static Comparator<SingleMapFile> scaleSorter = Comparator.comparingInt(m -> -m.scale());
 }

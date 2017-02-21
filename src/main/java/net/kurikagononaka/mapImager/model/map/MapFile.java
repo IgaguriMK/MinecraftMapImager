@@ -6,4 +6,6 @@ public interface MapFile {
     ColorImage getSizedColorImage();
 
     Bound getBound();
+
+    String getName();
 }

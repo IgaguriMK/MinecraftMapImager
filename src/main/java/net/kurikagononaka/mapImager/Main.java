@@ -3,9 +3,13 @@ package net.kurikagononaka.mapImager;
 import net.kurikagononaka.mapImager.model.InputModule;
 import net.kurikagononaka.mapImager.model.OutputModule;
 import net.kurikagononaka.mapImager.model.SortModule;
-import net.kurikagononaka.mapImager.model.map.SingleMapFile;
 import net.kurikagononaka.mapImager.model.map.MergedMap;
-import org.apache.commons.cli.*;
+import net.kurikagononaka.mapImager.model.map.SingleMapFile;
+import net.kurikagononaka.mapImager.model.output.MapMerger;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
 import java.io.IOException;
 import java.util.List;
@@ -41,12 +45,10 @@ public class Main {
             System.err.println("Merging images ...");
             int count = 1;
 
-            MergedMap mergedMap = new MergedMap();
 
-            for (SingleMapFile singleMapFile : singleMapFiles) {
-                System.err.println("Merging images (" + (count++) + "/" + singleMapFiles.size() + ") ...");
-                mergedMap.addMap(singleMapFile);
-            }
+            MapMerger merger = new MapMerger();
+            MergedMap mergedMap = merger.merge(singleMapFiles);
+
 
             System.err.println("Writing image to file ...");
             outputModule.writeToFile(mergedMap);
