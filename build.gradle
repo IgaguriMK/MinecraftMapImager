@@ -7,7 +7,7 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 group 'net.kurikagononaka'
-version '0.2.0'
+version '0.3.0'
 
 sourceCompatibility = 1.8
 
@@ -55,7 +55,7 @@ task releaseCopy (type: Copy, dependsOn: executableJar) {
 	include 'mapImager.jar'
 }
 
-task release (type: Zip, dependsOn: [createExe, releaseCopy]) {
+task release (type: Zip, dependsOn: [clean, createExe, releaseCopy]) {
 	from 'build/release/mapImager'
 	into ''
 }
