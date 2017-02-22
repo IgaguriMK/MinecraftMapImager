@@ -3,6 +3,7 @@ package net.kurikagononaka.mapImager;
 import net.kurikagononaka.mapImager.model.InputModule;
 import net.kurikagononaka.mapImager.model.OutputModule;
 import net.kurikagononaka.mapImager.model.SortModule;
+import net.kurikagononaka.mapImager.model.SeparateOutputModule;
 import net.kurikagononaka.mapImager.model.map.MergedMap;
 import net.kurikagononaka.mapImager.model.map.SingleMapFile;
 import net.kurikagononaka.mapImager.model.output.MapMerger;
@@ -21,15 +22,17 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        CommandLine cmd = parseArgs(args);
-
-        InputModule inputModule = InputModule.newInstance(cmd);
-        SortModule sortModule = SortModule.newInstance(cmd);
-        OutputModule outputModule = OutputModule.newInstance(cmd);
-
-        String[] files = cmd.getArgs();
-
         try {
+            CommandLine cmd = parseArgs(args);
+
+            InputModule inputModule = InputModule.newInstance(cmd);
+            SortModule sortModule = SortModule.newInstance(cmd);
+            OutputModule outputModule = OutputModule.newInstance(cmd);
+            SeparateOutputModule separateOutputModule = SeparateOutputModule.newInstance(cmd);
+
+
+            String[] files = cmd.getArgs();
+
             if (files.length == 0) {
                 System.err.println("No input file.");
                 System.exit(1);
@@ -38,6 +41,8 @@ public class Main {
             System.err.println("Opening " + files.length + " files ...");
 
             List<SingleMapFile> singleMapFiles = inputModule.loadAll(files);
+
+            separateOutputModule.writeToFile(singleMapFiles);
 
             System.err.println("Sorting images ...");
             sortModule.sort(singleMapFiles);
@@ -65,6 +70,7 @@ public class Main {
         InputModule.registerOptions(options);
         SortModule.registerOptions(options);
         OutputModule.registerOptions(options);
+        SeparateOutputModule.registerOptions(options);
 
         try {
             return new DefaultParser().parse(options, args);

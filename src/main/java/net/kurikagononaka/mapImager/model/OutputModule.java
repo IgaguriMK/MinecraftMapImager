@@ -43,6 +43,6 @@ public class OutputModule {
     }
 
     public void writeToFile(MergedMap mergedMap) throws IOException {
-        colorImageWriter.writeImage(mergedMap.getImage(), outputFileName);
+        colorImageWriter.writeImage(mergedMap.getColorImage(), outputFileName);
     }
 }

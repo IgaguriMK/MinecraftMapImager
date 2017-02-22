@@ -61,7 +61,8 @@ public class MergedMap implements MapFile {
         }
     }
 
-    public ColorImage getImage() {
+    @Override
+    public ColorImage getColorImage() {
         return image;
     }
 
