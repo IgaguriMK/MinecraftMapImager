@@ -40,6 +40,8 @@ public class InputModule {
     }
 
     public List<SingleMapFile> loadAll(String[] files) {
+        System.err.println("Opening " + files.length + " files ...");
+
         List<SingleMapFile> singleMapFiles = new ArrayList<>();
 
         for (String fileName : files) {

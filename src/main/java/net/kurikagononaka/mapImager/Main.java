@@ -38,24 +38,15 @@ public class Main {
                 System.exit(1);
             }
 
-            System.err.println("Opening " + files.length + " files ...");
-
             List<SingleMapFile> singleMapFiles = inputModule.loadAll(files);
 
             separateOutputModule.writeToFile(singleMapFiles);
 
-            System.err.println("Sorting images ...");
             sortModule.sort(singleMapFiles);
-
-            System.err.println("Merging images ...");
-            int count = 1;
-
 
             MapMerger merger = new MapMerger();
             MergedMap mergedMap = merger.merge(singleMapFiles);
 
-
-            System.err.println("Writing image to file ...");
             outputModule.writeToFile(mergedMap);
 
         } catch (IOException e) {
