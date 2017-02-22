@@ -42,6 +42,7 @@ public class SortModule implements Comparator<SingleMapFile> {
     }
 
     public void sort(List<SingleMapFile> singleMapFiles) {
+        System.err.println("Sorting images ...");
         singleMapFiles.sort(this);
     }
 

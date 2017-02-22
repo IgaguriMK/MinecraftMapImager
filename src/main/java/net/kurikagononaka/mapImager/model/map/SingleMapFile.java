@@ -23,6 +23,7 @@ public class SingleMapFile implements MapFile {
         return mapLocation;
     }
 
+    @Override
     public ColorImage getColorImage() {
         return colorImage;
     }

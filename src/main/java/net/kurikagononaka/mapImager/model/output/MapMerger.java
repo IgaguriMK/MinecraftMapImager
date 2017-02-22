@@ -17,6 +17,8 @@ public class MapMerger {
     }
 
     public MergedMap merge(List<SingleMapFile> mapFiles) {
+        System.err.println("Merging images ...");
+
         int chunkSize = chunkSize(mapFiles.size());
 
         System.err.println("Chunk size: " + chunkSize);
