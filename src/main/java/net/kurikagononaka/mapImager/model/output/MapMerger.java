@@ -19,18 +19,22 @@ public class MapMerger {
     public MergedMap merge(List<SingleMapFile> mapFiles) {
         System.err.println("Merging images ...");
 
-        int chunkSize = chunkSize(mapFiles.size());
-
-        System.err.println("Chunk size: " + chunkSize);
-
-        List<List<SingleMapFile>> mapChunks = Lists.partition(mapFiles, chunkSize);
+        List<List<SingleMapFile>> mapChunks = Lists.partition(mapFiles, chunkSize(mapFiles.size()));
 
         List<MergedMap> mergedMaps = mapChunks.stream()
                 .parallel()
                 .map(MapMerger::mergeList)
                 .collect(Collectors.toList());
 
-        return mergeList(mergedMaps);
+
+        List<List<MergedMap>> mergedChunks = Lists.partition(mergedMaps, chunkSize(mergedMaps.size()));
+
+        List<MergedMap> mergedMerged = mapChunks.stream()
+                .parallel()
+                .map(MapMerger::mergeList)
+                .collect(Collectors.toList());
+
+        return mergeList(mergedMerged);
     }
 
     private static MergedMap mergeList(List<? extends MapFile> mapFiles) {
@@ -48,6 +52,6 @@ public class MapMerger {
     private static int chunkSize(int listSize) {
         if (listSize < PARALLEL_THRESHOLD) return listSize;
 
-        return 2 * listSize / Runtime.getRuntime().availableProcessors();
+        return  listSize / (THREAD_MULTIPLIER * Runtime.getRuntime().availableProcessors());
     }
 }
