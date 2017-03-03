@@ -12,31 +12,33 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
-public class SeparateOutputModule {
+public class SeparateOutputModule extends Thread {
 
-    public static SeparateOutputModule newInstance(CommandLine cmd) throws IOException{
+    public static SeparateOutputModule newInstance(CommandLine cmd) throws IOException {
 
-        if(!cmd.hasOption("s")) {
+        if (!cmd.hasOption("s")) {
             return new SeparateOutputModule() {
                 @Override
-                public void writeToFile(List<SingleMapFile> mapFiles) throws IOException {}
+                public void writeToFile(List<SingleMapFile> mapFiles) throws IOException {
+                }
             };
         }
 
-        String output =  cmd.getOptionValue("s");
+        String output = cmd.getOptionValue("s");
 
         Path outputPath = Paths.get(output);
 
         File outputDir = outputPath.toFile();
 
-        if( outputDir.exists() ) {
+        if (outputDir.exists()) {
             if (!outputDir.isDirectory()) {
                 throw new IOException(outputDir.toString() + " is not directory.");
             }
         } else {
-            if(! outputDir.mkdirs() ) {
+            if (!outputDir.mkdirs()) {
                 throw new IOException("Cannot make directory " + outputDir.toString());
             }
         }
@@ -58,6 +60,8 @@ public class SeparateOutputModule {
     private Path outputDir;
     private ColorImageWriter colorImageWriter;
 
+    private List<SingleMapFile> mapFiles;
+
     private SeparateOutputModule(Path outputDir, ColorImageWriter colorImageWriter) {
         this.outputDir = outputDir;
         this.colorImageWriter = colorImageWriter;
@@ -71,15 +75,25 @@ public class SeparateOutputModule {
     }
 
     public void writeToFile(List<SingleMapFile> mapFiles) throws IOException {
+        this.mapFiles = new ArrayList<>(mapFiles);
+        start();
+    }
 
+    @Override
+    public void run() {
         System.err.println("Writing separate images ...");
 
-        for (MapFile m : mapFiles) {
-            String baseName = FilenameUtils.getBaseName(m.getName());
-            Path filePath = Paths.get(baseName + ".png");
-            Path allPath = outputDir.resolve(filePath);
+        try {
+            for (MapFile m : mapFiles) {
+                String baseName = FilenameUtils.getBaseName(m.getName());
+                Path filePath = Paths.get(baseName + ".png");
+                Path allPath = outputDir.resolve(filePath);
 
-            colorImageWriter.writeImage(m.getColorImage(), allPath.toString());
+                colorImageWriter.writeImage(m.getColorImage(), allPath.toString());
+            }
+        } catch (IOException e) {
+            System.err.println("IO Error.");
+            System.exit(1);
         }
     }
 }
