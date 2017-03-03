@@ -1,7 +1,7 @@
 MinecraftMapImager
 ======================
 
-MinecraftMapImagerはmap_\*.datファイルから画像への変換プログラムです。
+map_\*.datファイルから画像へ変換します。
 
 
 動作環境
