@@ -1,10 +1,15 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
 package net.kurikagononaka.mapImager.model.map;
 
 import net.kurikagononaka.mapImager.model.map.image.ColorImage;
 
-/**
- * Created by igaguri on 2017/01/23.
- */
+
 public class MergedMap implements MapFile {
 
     private static Object lockObj = new Object();

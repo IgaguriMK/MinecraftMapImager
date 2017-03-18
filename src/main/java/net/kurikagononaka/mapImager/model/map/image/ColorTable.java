@@ -1,11 +1,16 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
 package net.kurikagononaka.mapImager.model.map.image;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by igaguri on 2017/01/22.
- */
+
 public class ColorTable {
     private Color[] table;
 

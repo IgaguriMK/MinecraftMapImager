@@ -1,3 +1,10 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
 package net.kurikagononaka.mapImager.model;
 
 import net.kurikagononaka.mapImager.model.map.MergedMap;
@@ -8,9 +15,7 @@ import org.apache.commons.cli.Options;
 
 import java.io.IOException;
 
-/**
- * Created by igaguri on 2017/02/08.
- */
+
 public class OutputModule {
 
     public static OutputModule newInstance(CommandLine cmd) {

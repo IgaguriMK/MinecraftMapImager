@@ -1,3 +1,10 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
 package net.kurikagononaka.mapImager.model.map;
 
 import org.junit.Test;
@@ -5,9 +12,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-/**
- * Created by igaguri on 2017/01/23.
- */
+
 public class Vector2Test {
     @Test
     public void min() throws Exception {

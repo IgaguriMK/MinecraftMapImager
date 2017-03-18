@@ -1,11 +1,16 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
 package net.kurikagononaka.mapImager.model.nbt.nbtMapper;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 
-/**
- * Created by igaguri on 2017/01/22.
- */
+
 public class Path {
     private String name;
     private Path child;

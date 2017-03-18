@@ -1,3 +1,10 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
 package net.kurikagononaka.mapImager.model;
 
 import net.kurikagononaka.mapImager.model.map.SingleMapFile;
@@ -9,9 +16,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-/**
- * Created by igaguri on 2017/02/08.
- */
 public class SortModule implements Comparator<SingleMapFile> {
 
     public static SortModule newInstance(CommandLine cmd) {

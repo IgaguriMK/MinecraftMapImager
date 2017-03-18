@@ -1,3 +1,10 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
 package net.kurikagononaka.mapImager.model.input;
 
 import com.flowpowered.nbt.Tag;
@@ -10,9 +17,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-/**
- * Created by igaguri on 2017/01/23.
- */
 public class MapFileLoader {
 
     public MapFileLoader() {

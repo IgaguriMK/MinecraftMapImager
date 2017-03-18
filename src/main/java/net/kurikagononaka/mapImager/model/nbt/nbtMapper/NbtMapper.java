@@ -1,12 +1,17 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
 package net.kurikagononaka.mapImager.model.nbt.nbtMapper;
 
 import com.flowpowered.nbt.*;
 
 import java.lang.reflect.Field;
 
-/**
- * Created by igaguri on 2017/01/22.
- */
+
 public class NbtMapper {
     public static Object parse(Class targetClass, Tag<?> tag) {
 

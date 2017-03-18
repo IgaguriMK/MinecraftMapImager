@@ -1,3 +1,11 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
+
 package net.kurikagononaka.mapImager;
 
 import net.kurikagononaka.mapImager.model.InputModule;
@@ -12,13 +20,13 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+
+
 import java.io.IOException;
 import java.util.List;
 
 
-/**
- *
- */
+
 public class Main {
     public static void main(String[] args) {
 

@@ -1,3 +1,10 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
 package net.kurikagononaka.mapImager.model.output;
 
 import net.kurikagononaka.mapImager.model.map.image.ColorImage;
@@ -8,9 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
-/**
- * Created by igaguri on 2017/01/23.
- */
+
 public class ColorImageWriter {
 
     private static final String pngPattern = ".*\\.png$";
