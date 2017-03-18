@@ -10,7 +10,9 @@ local.properties
 # Intelij file
 *.iws
 *.ipr
-/.idea
+/.idea/*
+!/.idea/codeStyleSettings.xml
+!/.idea/fileTemplates/
 
 # Signing files
 .signing/

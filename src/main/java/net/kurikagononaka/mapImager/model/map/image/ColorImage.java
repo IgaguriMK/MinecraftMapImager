@@ -1,12 +1,16 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
 package net.kurikagononaka.mapImager.model.map.image;
 
 import net.kurikagononaka.mapImager.model.map.Vector2;
 
 import java.awt.image.BufferedImage;
 
-/**
- * Created by igaguri on 2017/01/22.
- */
 public class ColorImage {
 
     private final byte[][] image;

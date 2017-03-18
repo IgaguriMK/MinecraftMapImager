@@ -1,11 +1,16 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
 package net.kurikagononaka.mapImager.model.map;
 
 import net.kurikagononaka.mapImager.model.map.image.ColorImage;
 import net.kurikagononaka.mapImager.model.nbt.MapFileNbt;
 
-/**
- * Created by igaguri on 2017/01/22.
- */
+
 public class SingleMapFile implements MapFile {
     private final MapLocation mapLocation;
     private final ColorImage colorImage;
@@ -23,6 +28,7 @@ public class SingleMapFile implements MapFile {
         return mapLocation;
     }
 
+    @Override
     public ColorImage getColorImage() {
         return colorImage;
     }

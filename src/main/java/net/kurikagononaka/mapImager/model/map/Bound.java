@@ -1,8 +1,13 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
 package net.kurikagononaka.mapImager.model.map;
 
-/**
- * Created by igaguri on 2017/01/23.
- */
+
 public class Bound {
     private final int northIn;
     private final int southOver;

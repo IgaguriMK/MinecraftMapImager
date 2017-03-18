@@ -1,3 +1,10 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
 package net.kurikagononaka.mapImager.model.nbt;
 
 
@@ -5,9 +12,7 @@ import net.kurikagononaka.mapImager.model.nbt.nbtMapper.NbtValue;
 
 import java.util.Arrays;
 
-/**
- *
- */
+
 public class MapFileNbt {
     @NbtValue("/data/scale")
     public int scale;

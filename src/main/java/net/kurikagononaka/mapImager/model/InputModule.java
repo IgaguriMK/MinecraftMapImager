@@ -1,3 +1,10 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
 package net.kurikagononaka.mapImager.model;
 
 import net.kurikagononaka.mapImager.model.input.MapFileLoader;
@@ -10,9 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by igaguri on 2017/02/08.
- */
+
 public class InputModule {
 
     public static InputModule newInstance(CommandLine cmd) {
@@ -40,6 +45,8 @@ public class InputModule {
     }
 
     public List<SingleMapFile> loadAll(String[] files) {
+        System.err.println("Opening " + files.length + " files ...");
+
         List<SingleMapFile> singleMapFiles = new ArrayList<>();
 
         for (String fileName : files) {

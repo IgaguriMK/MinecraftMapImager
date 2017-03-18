@@ -1,8 +1,13 @@
+/*
+ *  Main Author: Igaguri
+ *  Copyright: 2017 Igaguri
+ *  License: MIT LICENSE
+ *           See README in repository.
+ */
+
 package net.kurikagononaka.mapImager.model.map;
 
-/**
- * Created by igaguri on 2017/01/22.
- */
+
 public class Vector2 {
     public final int x;
     public final int y;

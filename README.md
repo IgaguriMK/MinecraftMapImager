@@ -1,3 +1,8 @@
+
+master:  [![Build Status](https://travis-ci.org/IgaguriMK/MinecraftMapImager.svg?branch=master)](https://travis-ci.org/IgaguriMK/MinecraftMapImager)
+
+develop: [![Build Status](https://travis-ci.org/IgaguriMK/MinecraftMapImager.svg?branch=develop)](https://travis-ci.org/IgaguriMK/MinecraftMapImager)
+
 MinecraftMapImager
 ======================
 
