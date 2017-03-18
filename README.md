@@ -1,3 +1,6 @@
+
+[![Build Status](https://travis-ci.org/IgaguriMK/MinecraftMapImager.svg?branch=master)](https://travis-ci.org/IgaguriMK/MinecraftMapImager)
+
 MinecraftMapImager
 ======================
 
