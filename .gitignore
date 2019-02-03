@@ -1,11 +1,12 @@
 # Built application files
-build/
+/build
+/bin
 
 # Local configuration file (sdk path, etc)
 local.properties
 
 # Gradle generated files
-.gradle/
+.gradle
 
 # Intelij file
 *.iws
@@ -32,6 +33,9 @@ Thumbs.db
 # Editor files
 *.swp
 *~
+.classpath
+.project
+.settings
 
 # Output files
 *.png
